@@ -30,4 +30,4 @@ You may be able to get a temporary free acount in Azure to deploy this project t
 5. Open your browser and navigate to `https://localhost:5001`.
 
 
-License: [License](MIT.md)
+License: [MIT](MIT.md)
