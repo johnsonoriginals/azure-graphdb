@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
+    <UserSecretsId>5958d1e5-126d-4fe9-90bb-43a9353fe179</UserSecretsId>
+  </PropertyGroup>	
+	
+  <ItemGroup>
+    <PackageReference Include="Gremlin.Net" Version="3.4.8" />
+	<PackageReference Include="JsonApiDotNetCore" Version="4.0.0-beta1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Hackathon.Models.Post>
+
+<h2>View Post Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        @foreach (var item in Model)
+        {
+        <dd>
+
+            @if (Model.First() == item)
+            {
+                <b>Message from @item.Author:</b>
+
+            }
+            else
+            {
+                <b>Reply from @item.Author:</b>
+            }
+            @Html.DisplayFor(model => item.Content)
+            @await Html.PartialAsync("_reactions", item)
+        </dd>
+        }
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Reply", "Reply", new { id = Model.First().Id })
+    <br/>
+    @Html.ActionLink("Back to List", "Index")
+</p>

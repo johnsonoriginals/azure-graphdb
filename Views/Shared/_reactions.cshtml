@@ -1,0 +1,7 @@
+﻿@using Hackathon.Models 
+@model Post
+
+@Html.ActionLink("🤣 " + @Model.Lols, "AddReaction", new { id = @Model.Id, reactionType = "lol" })
+@Html.ActionLink("❤️ " + @Model.Hearts, "AddReaction", new { id = @Model.Id, reactionType = "heart" })
+@Html.ActionLink("👍 " + @Model.ThumbsUp, "AddReaction", new { id = @Model.Id, reactionType = "thumbsup" })
+@Html.ActionLink("🦒 " + @Model.GiraffeFaces, "AddReaction", new { id = @Model.Id, reactionType = "giraffeface" })

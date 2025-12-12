@@ -1,0 +1,1568 @@
+﻿@model IEnumerable<Hackathon.Models.Post>
+
+@{
+    ViewBag.Title = "List of Threads";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of Posts</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            So many posts.
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+                <br />
+                by
+                @Html.ActionLink(item.Author, "IndexByAuthor", new { AuthorId = item.AuthorId })
+                <br />
+                @await Html.PartialAsync("_reactions", item)
+            </td>
+            <td>
+                @Html.ActionLink("Reply", "Reply", new { id = item.Id })
+                <br />
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                <br />
+                @Html.ActionLink("See Replies", "Details", new { id = item.Id })
+                <br />
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+    <tr>
+        <td>
+            @Html.ActionLink("Threads with 🤣", "IndexByReaction", new { reactionType = "lol" })
+            <br />
+            @Html.ActionLink("Threads with ❤️ ", "IndexByReaction", new { reactionType = "heart" })
+            <br />
+            @Html.ActionLink("Threads with 👍 ", "IndexByReaction", new { reactionType = "thumbsup" })
+            <br />
+            @Html.ActionLink("Threads with 🦒 ", "IndexByReaction", new { reactionType = "giraffeface" })
+        </td>
+
+        <td>
+            @Html.ActionLink("Threads without 🤣", "IndexByReaction", new { reactionType = "lol", has = false })
+            <br />
+            @Html.ActionLink("Threads without ❤️ ", "IndexByReaction", new { reactionType = "heart", has = false })
+            <br />
+            @Html.ActionLink("Threads without 👍 ", "IndexByReaction", new { reactionType = "thumbsup", has = false })
+            <br />
+            @Html.ActionLink("Threads without 🦒 ", "IndexByReaction", new { reactionType = "giraffeface", has = false })
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.ActionLink("Top 10 Posts", "IndexTopTen")
+            <br />
+        </td>
+    </tr>
+</table>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+
+<div class="container">
+    <div class="row"><p>Should be able to post a new thread ✅</p></div>
+    <div class="row">
+        Add the vertex :
+    </div>
+    <div class="row">
+        <code>
+            g.addV('<var>label</var>').property('id', '<var>vertexId</var>').property('content', '<var>content</var>').property('context', '<var>context</var>').property('pk', '<var>key</var>')
+        </code>
+    </div>
+    <br />
+    <a class="btn btn-primary" data-toggle="collapse" href="#newThread" role="button" aria-expanded="false" aria-controls="collapseExample">
+        show .executionProfile()
+    </a>
+    <div class="collapse" id="newThread">
+        <div class="card card-body">
+            <pre><code>
+                    [
+              {
+                "gremlin": "g.addV('topic').property('id', 'e0a84997-f316-489d-a503-ae269a0587be').property('content', 'content').property('context', 'topic').property('pk', 'pk').executionProfile();",
+                "activityId": "14038316-2865-4a82-8bc5-fb78082909df",
+                "totalTime": 5,
+                "totalResourceUsage": 9.33,
+                "metrics": [
+                  {
+                    "name": "ConstantSourceOperator",
+                    "time": 0.0017000000000000001,
+                    "stepResourceUsage": 0,
+                    "annotations": {
+                      "percentTime": 0.03,
+                      "percentResourceUsage": 0
+                    },
+                    "counts": {
+                      "resultCount": 1
+                    }
+                  },
+                  {
+                    "name": "ProjectOperator",
+                    "time": 0.02,
+                    "stepResourceUsage": 0,
+                    "annotations": {
+                      "percentTime": 0.37,
+                      "percentResourceUsage": 0
+                    },
+                    "counts": {
+                      "resultCount": 1
+                    }
+                  },
+                  {
+                    "name": "QueryDerivedTableOperator",
+                    "time": 0.0171,
+                    "stepResourceUsage": 0,
+                    "annotations": {
+                      "percentTime": 0.31,
+                      "percentResourceUsage": 0
+                    },
+                    "counts": {
+                      "resultCount": 1
+                    }
+                  },
+                  {
+                    "name": "AddVertexOperator",
+                    "time": 5.3063,
+                    "stepResourceUsage": 9.33,
+                    "annotations": {
+                      "percentTime": 97.59,
+                      "percentResourceUsage": 100
+                    },
+                    "counts": {
+                      "resultCount": 1
+                    },
+                    "storeOps": [
+                      {
+                        "opType": "Create",
+                        "doc": "{\r\n  \"label\": \"topic\",\r\n  \"id\": \"e0a84997-f316-489d-a503-ae269a0587be\",\r\n  \"content\": [\r\n    {\r\n      \"id\": \"cce2cf9b-5432-4d02-b52b-0be0c8be2c56\",\r\n      \"_value\": \"content\"\r\n    }\r\n  ],\r\n  \"context\": [\r\n    {\r\n      \"id\": \"a9a57ee4-0708-4ac4-98d1-c48e1e41f917\",\r\n      \"_value\": \"topic\"\r\n    }\r\n  ],\r\n  \"pk\": \"pk\"\r\n}",
+                        "storeResourceUsage": 9.33
+                      }
+                    ]
+                  },
+                  {
+                    "name": "ProjectOperator",
+                    "time": 0.09229999999999983,
+                    "stepResourceUsage": 0,
+                    "annotations": {
+                      "percentTime": 1.7,
+                      "percentResourceUsage": 0
+                    },
+                    "counts": {
+                      "resultCount": 1
+                    }
+                  }
+                ]
+              }
+            ]
+        </code></pre>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+        Add the author as an Edge:
+    </div>
+    <br />
+
+    <div class="row">
+        <code>
+            g.V('<var>vertexId</var>').addE('author').to(g.V('<var>authorId</var>'))
+        </code>
+    </div>
+    <br />
+    <a class="btn btn-primary" data-toggle="collapse" href="#addAuthor" role="button" aria-expanded="false" aria-controls="collapseExample">
+        show .executionProfile()
+    </a>
+    <div class="collapse" id="addAuthor">
+        <div class="card card-body">
+            <pre><code>
+                    [
+                {
+                "gremlin": "g.V('e0a84997-f316-489d-a503-ae269a0587be').addE('author').to(g.V('749d012d-4436-4924-a831-74d0613e649e')).executionProfile()",
+                "activityId": "563337fd-366a-440f-87de-010bdbc4e2c7",
+                "totalTime": 18,
+                "totalResourceUsage": 14.440000000000001,
+                "metrics": [
+                    {
+                    "name": "GetVertices",
+                    "time": 9.145,
+                    "stepResourceUsage": 3.03,
+                    "annotations": {
+                        "percentTime": 50.53,
+                        "percentResourceUsage": 20.98
+                    },
+                    "counts": {
+                        "resultCount": 1
+                    },
+                    "storeOps": [
+                        {
+                        "fanoutFactor": 1,
+                        "count": 1,
+                        "size": 492,
+                        "storageCount": 1,
+                        "storageSize": 435,
+                        "time": 4.06,
+                        "storeResourceUsage": 3.03
+                        }
+                    ]
+                    },
+                    {
+                    "name": "ConstantSourceOperator",
+                    "time": 0.0009000000000000001,
+                    "stepResourceUsage": 0,
+                    "annotations": {
+                        "percentTime": 0,
+                        "percentResourceUsage": 0
+                    },
+                    "counts": {
+                        "resultCount": 1
+                    }
+                    },
+                    {
+                    "name": "ProjectOperator",
+                    "time": 0.016399999999999998,
+                    "stepResourceUsage": 0,
+                    "annotations": {
+                        "percentTime": 0.09,
+                        "percentResourceUsage": 0
+                    },
+                    "counts": {
+                        "resultCount": 1
+                    }
+                    },
+                    {
+                    "name": "ConstantSourceOperator",
+                    "time": 0.0001,
+                    "stepResourceUsage": 0,
+                    "annotations": {
+                        "percentTime": 0,
+                        "percentResourceUsage": 0
+                    },
+                    "counts": {
+                        "resultCount": 1
+                    }
+                    },
+                    {
+                    "name": "GetVertices",
+                    "time": 3.3941000000000003,
+                    "stepResourceUsage": 3.03,
+                    "annotations": {
+                        "percentTime": 18.76,
+                        "percentResourceUsage": 20.98
+                    },
+                    "counts": {
+                        "resultCount": 1
+                    },
+                    "storeOps": [
+                        {
+                        "fanoutFactor": 1,
+                        "count": 1,
+                        "size": 568,
+                        "storageCount": 1,
+                        "storageSize": 511,
+                        "time": 3.14,
+                        "storeResourceUsage": 3.03
+                        }
+                    ]
+                    },
+                    {
+                    "name": "ContainerOperator",
+                    "time": 0.031199999999999672,
+                    "stepResourceUsage": 0,
+                    "annotations": {
+                        "percentTime": 0.17,
+                        "percentResourceUsage": 0
+                    },
+                    "counts": {
+                        "resultCount": 1
+                    }
+                    },
+                    {
+                    "name": "CartesianProductOperator2",
+                    "time": 0.01849999999999996,
+                    "stepResourceUsage": 0,
+                    "annotations": {
+                        "percentTime": 0.1,
+                        "percentResourceUsage": 0
+                    },
+                    "counts": {
+                        "resultCount": 1
+                    }
+                    },
+                    {
+                    "name": "ProjectOperator",
+                    "time": 0.01440000000000019,
+                    "stepResourceUsage": 0,
+                    "annotations": {
+                        "percentTime": 0.08,
+                        "percentResourceUsage": 0
+                    },
+                    "counts": {
+                        "resultCount": 1
+                    }
+                    },
+                    {
+                    "name": "AddEdgeOperator",
+                    "time": 5.445,
+                    "stepResourceUsage": 8.38,
+                    "annotations": {
+                        "percentTime": 30.09,
+                        "percentResourceUsage": 58.03
+                    },
+                    "counts": {
+                        "resultCount": 1
+                    },
+                    "storeOps": [
+                        {
+                        "opType": "Create",
+                        "doc": "{\r\n  \"label\": \"author\",\r\n  \"id\": \"9c6fc1e6-c5d8-4ac6-9322-49bad2965c24\",\r\n  \"_sink\": \"749d012d-4436-4924-a831-74d0613e649e\",\r\n  \"_sinkLabel\": \"person\",\r\n  \"_sinkPartition\": \"pk\",\r\n  \"_vertexId\": \"e0a84997-f316-489d-a503-ae269a0587be\",\r\n  \"_vertexLabel\": \"topic\",\r\n  \"_isEdge\": true,\r\n  \"pk\": \"pk\"\r\n}",
+                        "storeResourceUsage": 8.38
+                        }
+                    ]
+                    },
+                    {
+                    "name": "ProjectOperator",
+                    "time": 0.03140000000000143,
+                    "stepResourceUsage": 0,
+                    "annotations": {
+                        "percentTime": 0.17,
+                        "percentResourceUsage": 0
+                    },
+                    "counts": {
+                        "resultCount": 1
+                    }
+                    }
+                ]
+                }
+            ]
+                </code></pre>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row"><p>Should be able to list replies to a thread ✅</p></div>
+
+    <div class="row">
+        Vertex Query to get a topic:
+    </div>
+    <div class="row">
+        <code>
+            g.V().hasLabel('<var>label</var>').has('id', '<var>vertexId</var>')
+        </code>
+    </div>
+    <br />
+    <a class="btn btn-primary" data-toggle="collapse" href="#getTopic" role="button" aria-expanded="false" aria-controls="collapseExample">
+        show .executionProfile()
+    </a>
+    <div class="collapse" id="getTopic">
+        <div class="card card-body">
+            <pre><code>
+                [
+                    {
+                    "gremlin": "g.V().hasLabel('topic').has('id', 'ac699962-d364-4cc5-b1b9-52cdf682aac5').executionProfile()   ",
+                    "activityId": "7f1cc8dd-b4bf-4d27-8af8-835ceb33fa39",
+                    "totalTime": 4,
+                    "totalResourceUsage": 3.13,
+                    "metrics": [
+                        {
+                        "name": "GetVertices",
+                        "time": 4.1126000000000005,
+                        "stepResourceUsage": 3.13,
+                        "annotations": {
+                            "percentTime": 99.2,
+                            "percentResourceUsage": 100
+                        },
+                        "counts": {
+                            "resultCount": 1
+                        },
+                        "storeOps": [
+                            {
+                            "fanoutFactor": 1,
+                            "count": 1,
+                            "size": 504,
+                            "storageCount": 1,
+                            "storageSize": 447,
+                            "time": 3.63,
+                            "storeResourceUsage": 3.13
+                            }
+                        ]
+                        },
+                        {
+                        "name": "ProjectOperator",
+                        "time": 0.033199999999999896,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                            "percentTime": 0.8,
+                            "percentResourceUsage": 0
+                        },
+                        "counts": {
+                            "resultCount": 1
+                        }
+                        }
+                    ]
+                    }
+                ]
+                </code></pre>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        Vertex query to get the replies:
+    </div>
+    <div class="row">
+        <code>
+            g.V('<var>vertexId</var>').hasLabel('<var>label</var>').outE('isareplyto').inv().hasLabel('reply')
+        </code>
+    </div>
+    <br />
+    <a class="btn btn-primary" data-toggle="collapse" href="#getReplies" role="button" aria-expanded="false" aria-controls="collapseExample">
+        show .executionProfile()
+    </a>
+    <div class="collapse" id="getReplies">
+        <div class="card card-body">
+            <pre><code>
+                [
+                  {
+                    "gremlin": "g.V('ac699962-d364-4cc5-b1b9-52cdf682aac5').hasLabel('topic').outE('isareplyto').inv().hasLabel('reply').executionProfile()",
+                    "activityId": "f774282d-fbc8-4396-92e0-68c49d10d573",
+                    "totalTime": 13,
+                    "totalResourceUsage": 9.78,
+                    "metrics": [
+                      {
+                        "name": "GetVertices",
+                        "time": 4.4152,
+                        "stepResourceUsage": 3.13,
+                        "annotations": {
+                          "percentTime": 33.99,
+                          "percentResourceUsage": 32
+                        },
+                        "counts": {
+                          "resultCount": 1
+                        },
+                        "storeOps": [
+                          {
+                            "fanoutFactor": 1,
+                            "count": 1,
+                            "size": 504,
+                            "storageCount": 1,
+                            "storageSize": 447,
+                            "time": 3.97,
+                            "storeResourceUsage": 3.13
+                          }
+                        ]
+                      },
+                      {
+                        "name": "GetEdges",
+                        "time": 4.5554,
+                        "stepResourceUsage": 3.38,
+                        "annotations": {
+                          "percentTime": 35.06,
+                          "percentResourceUsage": 34.56
+                        },
+                        "counts": {
+                          "resultCount": 2
+                        },
+                        "storeOps": [
+                          {
+                            "fanoutFactor": 1,
+                            "count": 2,
+                            "size": 984,
+                            "storageCount": 2,
+                            "storageSize": 934,
+                            "time": 4.23,
+                            "storeResourceUsage": 3.38
+                          }
+                        ]
+                      },
+                      {
+                        "name": "GetNeighborVertices",
+                        "time": 3.9194000000000013,
+                        "stepResourceUsage": 3.27,
+                        "annotations": {
+                          "percentTime": 30.17,
+                          "percentResourceUsage": 33.44
+                        },
+                        "counts": {
+                          "resultCount": 2
+                        },
+                        "storeOps": [
+                          {
+                            "fanoutFactor": 1,
+                            "count": 2,
+                            "size": 953,
+                            "storageCount": 2,
+                            "storageSize": 887,
+                            "time": 3.39,
+                            "storeResourceUsage": 3.27
+                          }
+                        ]
+                      },
+                      {
+                        "name": "FilterInBatchOperator",
+                        "time": 0.04770000000000074,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                          "percentTime": 0.37,
+                          "percentResourceUsage": 0
+                        },
+                        "counts": {
+                          "resultCount": 2
+                        }
+                      },
+                      {
+                        "name": "ProjectOperator",
+                        "time": 0.05369999999999919,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                          "percentTime": 0.41,
+                          "percentResourceUsage": 0
+                        },
+                        "counts": {
+                          "resultCount": 2
+                        }
+                      }
+                    ]
+                  }
+                ]
+                </code></pre>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        Vertex query to collect authoring information kept as an edge.
+    </div>
+    <div class="row">
+        <code>
+            g.V('<var>vertexId</var>').hasLabel('<var>label</var>').outE('author').inv()
+        </code>
+    </div>
+    <br />
+    <a class="btn btn-primary" data-toggle="collapse" href="#getAuthor" role="button" aria-expanded="false" aria-controls="collapseExample">
+        show .executionProfile()
+    </a>
+    <div class="collapse" id="getAuthor">
+        <div class="card card-body">
+            <pre><code>
+                [
+                  {
+                    "gremlin": "g.V('ac699962-d364-4cc5-b1b9-52cdf682aac5').hasLabel('topic').outE('author').inv().executionProfile()",
+                    "activityId": "08d25c97-dac3-4226-93ff-b9f425ff76d6",
+                    "totalTime": 11,
+                    "totalResourceUsage": 9.59,
+                    "metrics": [
+                      {
+                        "name": "GetVertices",
+                        "time": 4.0169,
+                        "stepResourceUsage": 3.13,
+                        "annotations": {
+                          "percentTime": 36.79,
+                          "percentResourceUsage": 32.64
+                        },
+                        "counts": {
+                          "resultCount": 1
+                        },
+                        "storeOps": [
+                          {
+                            "fanoutFactor": 1,
+                            "count": 1,
+                            "size": 504,
+                            "storageCount": 1,
+                            "storageSize": 447,
+                            "time": 3.58,
+                            "storeResourceUsage": 3.13
+                          }
+                        ]
+                      },
+                      {
+                        "name": "GetEdges",
+                        "time": 3.3564000000000007,
+                        "stepResourceUsage": 3.33,
+                        "annotations": {
+                          "percentTime": 30.74,
+                          "percentResourceUsage": 34.72
+                        },
+                        "counts": {
+                          "resultCount": 1
+                        },
+                        "storeOps": [
+                          {
+                            "fanoutFactor": 1,
+                            "count": 1,
+                            "size": 513,
+                            "storageCount": 1,
+                            "storageSize": 464,
+                            "time": 3.02,
+                            "storeResourceUsage": 3.33
+                          }
+                        ]
+                      },
+                      {
+                        "name": "GetNeighborVertices",
+                        "time": 3.512599999999999,
+                        "stepResourceUsage": 3.13,
+                        "annotations": {
+                          "percentTime": 32.17,
+                          "percentResourceUsage": 32.64
+                        },
+                        "counts": {
+                          "resultCount": 1
+                        },
+                        "storeOps": [
+                          {
+                            "fanoutFactor": 1,
+                            "count": 1,
+                            "size": 575,
+                            "storageCount": 1,
+                            "storageSize": 518,
+                            "time": 3.13,
+                            "storeResourceUsage": 3.13
+                          }
+                        ]
+                      },
+                      {
+                        "name": "ProjectOperator",
+                        "time": 0.03130000000000166,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                          "percentTime": 0.29,
+                          "percentResourceUsage": 0
+                        },
+                        "counts": {
+                          "resultCount": 1
+                        }
+                      }
+                    ]
+                  }
+                ]
+                </code></pre>
+        </div>
+    </div>
+    <hr />
+
+    <div class="row"><p>Should be able to list threads made by a specific user ✅</p></div>
+
+    <div class="row">
+        Vertex query to filter topics by author:
+    </div>
+    <div class="row">
+        <code>
+            g.V('<var>authorId</var>').hasLabel('<var>label</var>').inE('author').outV().has('context', '<var>context</var>')
+        </code>
+    </div>
+    <br />
+    <a class="btn btn-primary" data-toggle="collapse" href="#listThreads" role="button" aria-expanded="false" aria-controls="collapseExample">
+        show .executionProfile()
+    </a>
+    <div class="collapse" id="listThreads">
+        <div class="card card-body">
+            <pre><code>
+                [
+                  {
+                    "gremlin": "g.V('33e71b67-bff2-4df1-b7d6-9b9d24af304e').hasLabel('topic').inE('author').outV().has('context', 'topic').executionProfile()",
+                    "activityId": "43ef7574-0632-4eb2-9613-e1db5fd8d45e",
+                    "totalTime": 4,
+                    "totalResourceUsage": 2.89,
+                    "metrics": [
+                      {
+                        "name": "GetVertices",
+                        "time": 3.8337000000000003,
+                        "stepResourceUsage": 2.89,
+                        "annotations": {
+                          "percentTime": 98.31,
+                          "percentResourceUsage": 100
+                        },
+                        "counts": {
+                          "resultCount": 0
+                        },
+                        "storeOps": [
+                          {
+                            "fanoutFactor": 1,
+                            "count": 0,
+                            "size": 49,
+                            "storageCount": 0,
+                            "storageSize": 0,
+                            "time": 3.37,
+                            "storeResourceUsage": 2.89
+                          }
+                        ]
+                      },
+                      {
+                        "name": "GetEdges",
+                        "time": 0.01089999999999991,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                          "percentTime": 0.28,
+                          "percentResourceUsage": 0
+                        },
+                        "counts": {
+                          "resultCount": 0
+                        }
+                      },
+                      {
+                        "name": "GetNeighborVertices",
+                        "time": 0.023400000000000087,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                          "percentTime": 0.6,
+                          "percentResourceUsage": 0
+                        },
+                        "counts": {
+                          "resultCount": 0
+                        }
+                      },
+                      {
+                        "name": "FilterInBatchOperator",
+                        "time": 0.00990000000000002,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                          "percentTime": 0.25,
+                          "percentResourceUsage": 0
+                        },
+                        "counts": {
+                          "resultCount": 0
+                        }
+                      },
+                      {
+                        "name": "ProjectOperator",
+                        "time": 0.021700000000000053,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                          "percentTime": 0.56,
+                          "percentResourceUsage": 0
+                        },
+                        "counts": {
+                          "resultCount": 0
+                        }
+                      }
+                    ]
+                  }
+                ]
+                </code></pre>
+        </div>
+    </div>
+    <hr />
+
+    <div class="row"><p>should be able to react to a thread (🤣, ❤️, 👍, 🦒) ✅ </p></div>
+
+    <div class="row">
+        Vertex Query to add Reactions:
+    </div>
+    <div class="row">
+        <code>
+            g.V('<var>vertexId</var>').addE('<var>reactionType</var>').to(g.V('<var>vertexId</var>'))
+        </code>
+    </div>
+    <br />
+    <a class="btn btn-primary" data-toggle="collapse" href="#addReaction" role="button" aria-expanded="false" aria-controls="collapseExample">
+        show .executionProfile()
+    </a>
+    <div class="collapse" id="addReaction">
+        <div class="card card-body">
+            <pre><code>
+                [
+                    {
+                    "gremlin": "g.V('ac699962-d364-4cc5-b1b9-52cdf682aac5').addE('thumbsup').to(g.V('ac699962-d364-4cc5-b1b9-52cdf682aac5')).executionProfile()",
+                    "activityId": "b88262e6-0866-4857-b10e-86e0028796e0",
+                    "totalTime": 14,
+                    "totalResourceUsage": 14.440000000000001,
+                    "metrics": [
+                        {
+                        "name": "GetVertices",
+                        "time": 4.4878,
+                        "stepResourceUsage": 3.03,
+                        "annotations": {
+                            "percentTime": 32.95,
+                            "percentResourceUsage": 20.98
+                        },
+                        "counts": {
+                            "resultCount": 1
+                        },
+                        "storeOps": [
+                            {
+                            "fanoutFactor": 1,
+                            "count": 1,
+                            "size": 504,
+                            "storageCount": 1,
+                            "storageSize": 447,
+                            "time": 3.97,
+                            "storeResourceUsage": 3.03
+                            }
+                        ]
+                        },
+                        {
+                        "name": "ConstantSourceOperator",
+                        "time": 0.0007,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                            "percentTime": 0.01,
+                            "percentResourceUsage": 0
+                        },
+                        "counts": {
+                            "resultCount": 1
+                        }
+                        },
+                        {
+                        "name": "ProjectOperator",
+                        "time": 0.0189,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                            "percentTime": 0.14,
+                            "percentResourceUsage": 0
+                        },
+                        "counts": {
+                            "resultCount": 1
+                        }
+                        },
+                        {
+                        "name": "ConstantSourceOperator",
+                        "time": 0.0001,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                            "percentTime": 0,
+                            "percentResourceUsage": 0
+                        },
+                        "counts": {
+                            "resultCount": 1
+                        }
+                        },
+                        {
+                        "name": "GetVertices",
+                        "time": 3.968,
+                        "stepResourceUsage": 3.03,
+                        "annotations": {
+                            "percentTime": 29.13,
+                            "percentResourceUsage": 20.98
+                        },
+                        "counts": {
+                            "resultCount": 1
+                        },
+                        "storeOps": [
+                            {
+                            "fanoutFactor": 1,
+                            "count": 1,
+                            "size": 504,
+                            "storageCount": 1,
+                            "storageSize": 447,
+                            "time": 3.66,
+                            "storeResourceUsage": 3.03
+                            }
+                        ]
+                        },
+                        {
+                        "name": "ContainerOperator",
+                        "time": 0.03359999999999985,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                            "percentTime": 0.25,
+                            "percentResourceUsage": 0
+                        },
+                        "counts": {
+                            "resultCount": 1
+                        }
+                        },
+                        {
+                        "name": "CartesianProductOperator2",
+                        "time": 0.017600000000000726,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                            "percentTime": 0.13,
+                            "percentResourceUsage": 0
+                        },
+                        "counts": {
+                            "resultCount": 1
+                        }
+                        },
+                        {
+                        "name": "ProjectOperator",
+                        "time": 0.013799999999999812,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                            "percentTime": 0.1,
+                            "percentResourceUsage": 0
+                        },
+                        "counts": {
+                            "resultCount": 1
+                        }
+                        },
+                        {
+                        "name": "AddEdgeOperator",
+                        "time": 5.052300000000001,
+                        "stepResourceUsage": 8.38,
+                        "annotations": {
+                            "percentTime": 37.1,
+                            "percentResourceUsage": 58.03
+                        },
+                        "counts": {
+                            "resultCount": 1
+                        },
+                        "storeOps": [
+                            {
+                            "opType": "Create",
+                            "doc": "{\r\n  \"label\": \"thumbsup\",\r\n  \"id\": \"d365a23a-a154-43b4-bf94-f06ab0592818\",\r\n  \"_sink\": \"ac699962-d364-4cc5-b1b9-52cdf682aac5\",\r\n  \"_sinkLabel\": \"topic\",\r\n  \"_sinkPartition\": \"pk\",\r\n  \"_vertexId\": \"ac699962-d364-4cc5-b1b9-52cdf682aac5\",\r\n  \"_vertexLabel\": \"topic\",\r\n  \"_isEdge\": true,\r\n  \"pk\": \"pk\"\r\n}",
+                            "storeResourceUsage": 8.38
+                            }
+                        ]
+                        },
+                        {
+                        "name": "ProjectOperator",
+                        "time": 0.026900000000001256,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                            "percentTime": 0.2,
+                            "percentResourceUsage": 0
+                        },
+                        "counts": {
+                            "resultCount": 1
+                        }
+                        }
+                    ]
+                    }
+                ]
+              </code></pre>
+        </div>
+    </div>
+    <hr />
+
+    <div class="row"><p>should be able to summarize the count of reactions, by thread ✅</p></div>
+
+    <div class="row">
+        Each outgoing edge count is bound to a Model (what PHP devs might describe as an Entity):
+    </div>
+    <div class="row">
+        <code>
+            g.V('<var>vertexId</var>').hasLabel('<var>label</var>').outE('<var>reactionType</var>').count()
+        </code>
+    </div>
+    <br />
+    <a class="btn btn-primary" data-toggle="collapse" href="#countReaction" role="button" aria-expanded="false" aria-controls="collapseExample">
+        show .executionProfile()
+    </a>
+    <div class="collapse" id="countReaction">
+        <div class="card card-body">
+            <pre><code>
+                [
+                    {
+                    "gremlin": "g.V('ac699962-d364-4cc5-b1b9-52cdf682aac5').hasLabel('topic').outE('thumbsup').count().executionProfile()",
+                    "activityId": "885cf5d7-bbcd-4657-9b9c-3724d8327f7f",
+                    "totalTime": 8,
+                    "totalResourceUsage": 6.6,
+                    "metrics": [
+                        {
+                        "name": "GetVertices",
+                        "time": 4.1827000000000005,
+                        "stepResourceUsage": 3.13,
+                        "annotations": {
+                            "percentTime": 50.97,
+                            "percentResourceUsage": 47.42
+                        },
+                        "counts": {
+                            "resultCount": 1
+                        },
+                        "storeOps": [
+                            {
+                            "fanoutFactor": 1,
+                            "count": 1,
+                            "size": 504,
+                            "storageCount": 1,
+                            "storageSize": 447,
+                            "time": 3.73,
+                            "storeResourceUsage": 3.13
+                            }
+                        ]
+                        },
+                        {
+                        "name": "GetEdges",
+                        "time": 3.9362999999999975,
+                        "stepResourceUsage": 3.47,
+                        "annotations": {
+                            "percentTime": 47.97,
+                            "percentResourceUsage": 52.58
+                        },
+                        "counts": {
+                            "resultCount": 4
+                        },
+                        "storeOps": [
+                            {
+                            "fanoutFactor": 1,
+                            "count": 4,
+                            "size": 1912,
+                            "storageCount": 4,
+                            "storageSize": 1860,
+                            "time": 3.6,
+                            "storeResourceUsage": 3.47
+                            }
+                        ]
+                        },
+                        {
+                        "name": "ProjectAggregation",
+                        "time": 0.021700000000002717,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                            "percentTime": 0.26,
+                            "percentResourceUsage": 0
+                        },
+                        "counts": {
+                            "resultCount": 1
+                        }
+                        },
+                        {
+                        "name": "QueryDerivedTableOperator",
+                        "time": 0.011000000000001009,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                            "percentTime": 0.13,
+                            "percentResourceUsage": 0
+                        },
+                        "counts": {
+                            "resultCount": 1
+                        }
+                        },
+                        {
+                        "name": "ProjectOperator",
+                        "time": 0.05389999999999873,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                            "percentTime": 0.66,
+                            "percentResourceUsage": 0
+                        },
+                        "counts": {
+                            "resultCount": 1
+                        }
+                        }
+                    ]
+                    }
+                ]
+                </code></pre>
+        </div>
+    </div>
+    <hr />
+
+    <div class="row"><p>should be able to filter threads with a specific reaction type ✅</p></div>
+
+    <div class="row">
+        Vertex query to get distinct items by inbound edges.
+    </div>
+    <div class="row">
+        <code>
+            g.V().hasLabel('<var>label</var>').inE('<var>reactionType</var>').inv().dedup().by('content')
+        </code>
+    </div>
+    <br />
+    <a class="btn btn-primary" data-toggle="collapse" href="#filterReaction" role="button" aria-expanded="false" aria-controls="collapseExample">
+        show .executionProfile()
+    </a>
+    <div class="collapse" id="filterReaction">
+        <div class="card card-body">
+            <pre><code>
+                    [
+                      {
+                        "gremlin": "g.V().hasLabel('topic').inE('lol').inv().dedup().by('content').executionProfile()",
+                        "activityId": "884f101c-ef46-4c64-91f0-2f6cd2a3b7c3",
+                        "totalTime": 9,
+                        "totalResourceUsage": 7.050000000000001,
+                        "metrics": [
+                          {
+                            "name": "GetVertices",
+                            "time": 4.6892,
+                            "stepResourceUsage": 3.24,
+                            "annotations": {
+                              "percentTime": 52,
+                              "percentResourceUsage": 45.96
+                            },
+                            "counts": {
+                              "resultCount": 7
+                            },
+                            "storeOps": [
+                              {
+                                "fanoutFactor": 1,
+                                "count": 7,
+                                "size": 3252,
+                                "storageCount": 7,
+                                "storageSize": 3141,
+                                "time": 4.01,
+                                "storeResourceUsage": 3.24
+                              }
+                            ]
+                          },
+                          {
+                            "name": "GetEdges",
+                            "time": 4.120700000000001,
+                            "stepResourceUsage": 3.81,
+                            "annotations": {
+                              "percentTime": 45.7,
+                              "percentResourceUsage": 54.04
+                            },
+                            "counts": {
+                              "resultCount": 3
+                            },
+                            "storeOps": [
+                              {
+                                "fanoutFactor": 1,
+                                "count": 3,
+                                "size": 1431,
+                                "storageCount": 3,
+                                "storageSize": 1380,
+                                "time": 3.62,
+                                "storeResourceUsage": 3.81
+                              }
+                            ]
+                          },
+                          {
+                            "name": "GetNeighborVertices",
+                            "time": 0.08359999999999879,
+                            "stepResourceUsage": 0,
+                            "annotations": {
+                              "percentTime": 0.93,
+                              "percentResourceUsage": 0
+                            },
+                            "counts": {
+                              "resultCount": 3
+                            }
+                          },
+                          {
+                            "name": "ConstantSourceOperator",
+                            "time": 0.001,
+                            "stepResourceUsage": 0,
+                            "annotations": {
+                              "percentTime": 0.01,
+                              "percentResourceUsage": 0
+                            },
+                            "counts": {
+                              "resultCount": 3
+                            }
+                          },
+                          {
+                            "name": "ValuesOperator",
+                            "time": 0.0184,
+                            "stepResourceUsage": 0,
+                            "annotations": {
+                              "percentTime": 0.2,
+                              "percentResourceUsage": 0
+                            },
+                            "counts": {
+                              "resultCount": 3
+                            }
+                          },
+                          {
+                            "name": "ProjectOperator",
+                            "time": 0.0252,
+                            "stepResourceUsage": 0,
+                            "annotations": {
+                              "percentTime": 0.28,
+                              "percentResourceUsage": 0
+                            },
+                            "counts": {
+                              "resultCount": 3
+                            }
+                          },
+                          {
+                            "name": "DeduplicateOperator",
+                            "time": 0.050200000000000244,
+                            "stepResourceUsage": 0,
+                            "annotations": {
+                              "percentTime": 0.56,
+                              "percentResourceUsage": 0
+                            },
+                            "counts": {
+                              "resultCount": 2
+                            }
+                          },
+                          {
+                            "name": "ProjectOperator",
+                            "time": 0.02859999999999907,
+                            "stepResourceUsage": 0,
+                            "annotations": {
+                              "percentTime": 0.32,
+                              "percentResourceUsage": 0
+                            },
+                            "counts": {
+                              "resultCount": 2
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                </code></pre>
+        </div>
+    </div>
+    <hr />
+
+    <div class="row"><p>should be able to filter threads without a specific reaction type ✅</p></div>
+
+    <div class="row">
+        Vertex query to get vertices which do not have inbound edges of a particular type.
+    </div>
+    <div class="row">
+        <code>
+            g.V().not(inE('<var>reactionType</var>')).hasLabel('<var>label</var>')
+        </code>
+    </div>
+    <br />
+    <a class="btn btn-primary" data-toggle="collapse" href="#filterReactionWithout" role="button" aria-expanded="false" aria-controls="collapseExample">
+        show .executionProfile()
+    </a>
+    <div class="collapse" id="filterReactionWithout">
+        <div class="card card-body">
+            <pre><code>
+                [
+                  {
+                    "gremlin": "g.V().not(inE('lol')).hasLabel('topic').executionProfile()",
+                    "activityId": "8ff8c1df-05fa-4600-b57e-7526c0464213",
+                    "totalTime": 9,
+                    "totalResourceUsage": 7.050000000000001,
+                    "metrics": [
+                      {
+                        "name": "GetVertices",
+                        "time": 4.764400000000001,
+                        "stepResourceUsage": 3.24,
+                        "annotations": {
+                          "percentTime": 52.96,
+                          "percentResourceUsage": 45.96
+                        },
+                        "counts": {
+                          "resultCount": 7
+                        },
+                        "storeOps": [
+                          {
+                            "fanoutFactor": 1,
+                            "count": 7,
+                            "size": 3252,
+                            "storageCount": 7,
+                            "storageSize": 3141,
+                            "time": 4.13,
+                            "storeResourceUsage": 3.24
+                          }
+                        ]
+                      },
+                      {
+                        "name": "ConstantSourceOperator",
+                        "time": 0.0044,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                          "percentTime": 0.05,
+                          "percentResourceUsage": 0
+                        },
+                        "counts": {
+                          "resultCount": 7
+                        }
+                      },
+                      {
+                        "name": "GetEdges",
+                        "time": 3.8410000000000006,
+                        "stepResourceUsage": 3.81,
+                        "annotations": {
+                          "percentTime": 42.7,
+                          "percentResourceUsage": 54.04
+                        },
+                        "counts": {
+                          "resultCount": 3
+                        },
+                        "storeOps": [
+                          {
+                            "fanoutFactor": 1,
+                            "count": 3,
+                            "size": 1431,
+                            "storageCount": 3,
+                            "storageSize": 1380,
+                            "time": 3.46,
+                            "storeResourceUsage": 3.81
+                          }
+                        ]
+                      },
+                      {
+                        "name": "ProjectOperator",
+                        "time": 0.0237999999999996,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                          "percentTime": 0.26,
+                          "percentResourceUsage": 0
+                        },
+                        "counts": {
+                          "resultCount": 3
+                        }
+                      },
+                      {
+                        "name": "FilterInBatchOperator",
+                        "time": 0.32510000000000083,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                          "percentTime": 3.61,
+                          "percentResourceUsage": 0
+                        },
+                        "counts": {
+                          "resultCount": 5
+                        }
+                      },
+                      {
+                        "name": "ProjectOperator",
+                        "time": 0.0373999999999981,
+                        "stepResourceUsage": 0,
+                        "annotations": {
+                          "percentTime": 0.42,
+                          "percentResourceUsage": 0
+                        },
+                        "counts": {
+                          "resultCount": 5
+                        }
+                      }
+                    ]
+                  }
+                ]
+                </code></pre>
+        </div>
+    </div>
+    <hr />
+
+    <div class="row"><p>should be able to show top 10 threads with the most reaction types across all conversations ✅</p></div>
+
+    <div class="row">
+        Vertex query to order vertices descending by the count of inbound edges, limited to 10.
+    </div>
+    <div class="row">
+        <code>
+            g.V().hasLabel('<var>label</var>').order().by(inE().count(), decr).limit(10)
+        </code>
+    </div>
+    <a class="btn btn-primary" data-toggle="collapse" href="#top10" role="button" aria-expanded="false" aria-controls="collapseExample">
+        show .executionProfile()
+    </a>
+    <div class="collapse" id="top10">
+        <div class="card card-body">
+            <pre><code>
+            [
+              {
+                "gremlin": "g.V().hasLabel('topic').order().by(inE().count(), decr).limit(10).executionProfile()",
+                "activityId": "d23b9b73-0b14-4402-a539-6ea859b26b6b",
+                "totalTime": 29,
+                "totalResourceUsage": 24.68,
+                "metrics": [
+                  {
+                    "name": "GetVertices",
+                    "time": 4.7269,
+                    "stepResourceUsage": 3.24,
+                    "annotations": {
+                      "percentTime": 16.45,
+                      "percentResourceUsage": 13.13
+                    },
+                    "counts": {
+                      "resultCount": 7
+                    },
+                    "storeOps": [
+                      {
+                        "fanoutFactor": 1,
+                        "count": 7,
+                        "size": 3252,
+                        "storageCount": 7,
+                        "storageSize": 3141,
+                        "time": 4.06,
+                        "storeResourceUsage": 3.24
+                      }
+                    ]
+                  },
+                  {
+                    "name": "ConstantSourceOperator",
+                    "time": 0.0039000000000000007,
+                    "stepResourceUsage": 0,
+                    "annotations": {
+                      "percentTime": 0.01,
+                      "percentResourceUsage": 0
+                    },
+                    "counts": {
+                      "resultCount": 7
+                    }
+                  },
+                  {
+                    "name": "ConstantSourceOperator",
+                    "time": 0.0077,
+                    "stepResourceUsage": 0,
+                    "annotations": {
+                      "percentTime": 0.03,
+                      "percentResourceUsage": 0
+                    },
+                    "counts": {
+                      "resultCount": 7
+                    }
+                  },
+                  {
+                    "name": "GetEdges",
+                    "time": 23.205700000000004,
+                    "stepResourceUsage": 21.44,
+                    "annotations": {
+                      "percentTime": 80.77,
+                      "percentResourceUsage": 86.87
+                    },
+                    "counts": {
+                      "resultCount": 22
+                    },
+                    "storeOps": [
+                      {
+                        "fanoutFactor": 1,
+                        "count": 14,
+                        "size": 6611,
+                        "storageCount": 14,
+                        "storageSize": 6548,
+                        "time": 3.84,
+                        "storeResourceUsage": 3.57
+                      },
+                      {
+                        "fanoutFactor": 1,
+                        "count": 5,
+                        "size": 2387,
+                        "storageCount": 5,
+                        "storageSize": 2334,
+                        "time": 3.31,
+                        "storeResourceUsage": 3.2
+                      },
+                      {
+                        "fanoutFactor": 1,
+                        "count": 1,
+                        "size": 514,
+                        "storageCount": 1,
+                        "storageSize": 465,
+                        "time": 2.8,
+                        "storeResourceUsage": 3.03
+                      },
+                      {
+                        "fanoutFactor": 1,
+                        "count": 1,
+                        "size": 511,
+                        "storageCount": 1,
+                        "storageSize": 462,
+                        "time": 2.92,
+                        "storeResourceUsage": 3.03
+                      },
+                      {
+                        "fanoutFactor": 1,
+                        "count": 1,
+                        "size": 509,
+                        "storageCount": 1,
+                        "storageSize": 460,
+                        "time": 2.83,
+                        "storeResourceUsage": 3.03
+                      },
+                      {
+                        "fanoutFactor": 1,
+                        "count": 0,
+                        "size": 49,
+                        "storageCount": 0,
+                        "storageSize": 0,
+                        "time": 2.3,
+                        "storeResourceUsage": 2.79
+                      },
+                      {
+                        "fanoutFactor": 1,
+                        "count": 0,
+                        "size": 49,
+                        "storageCount": 0,
+                        "storageSize": 0,
+                        "time": 2.69,
+                        "storeResourceUsage": 2.79
+                      }
+                    ]
+                  },
+                  {
+                    "name": "ProjectAggregation",
+                    "time": 0.2947999999999986,
+                    "stepResourceUsage": 0,
+                    "annotations": {
+                      "percentTime": 1.03,
+                      "percentResourceUsage": 0
+                    },
+                    "counts": {
+                      "resultCount": 7
+                    }
+                  },
+                  {
+                    "name": "QueryDerivedTableOperator",
+                    "time": 0.06289999999999552,
+                    "stepResourceUsage": 0,
+                    "annotations": {
+                      "percentTime": 0.22,
+                      "percentResourceUsage": 0
+                    },
+                    "counts": {
+                      "resultCount": 7
+                    }
+                  },
+                  {
+                    "name": "ProjectOperator",
+                    "time": 0.05310000000000059,
+                    "stepResourceUsage": 0,
+                    "annotations": {
+                      "percentTime": 0.18,
+                      "percentResourceUsage": 0
+                    },
+                    "counts": {
+                      "resultCount": 7
+                    }
+                  },
+                  {
+                    "name": "OrderOperator",
+                    "time": 0.28399999999999537,
+                    "stepResourceUsage": 0,
+                    "annotations": {
+                      "percentTime": 0.99,
+                      "percentResourceUsage": 0
+                    },
+                    "counts": {
+                      "resultCount": 7
+                    }
+                  },
+                  {
+                    "name": "RangeOperator",
+                    "time": 0.05180000000000007,
+                    "stepResourceUsage": 0,
+                    "annotations": {
+                      "percentTime": 0.18,
+                      "percentResourceUsage": 0
+                    },
+                    "counts": {
+                      "resultCount": 7
+                    }
+                  },
+                  {
+                    "name": "ProjectOperator",
+                    "time": 0.04010000000000602,
+                    "stepResourceUsage": 0,
+                    "annotations": {
+                      "percentTime": 0.14,
+                      "percentResourceUsage": 0
+                    },
+                    "counts": {
+                      "resultCount": 7
+                    }
+                  }
+                ]
+              }
+            ]
+                </code></pre>
+        </div>
+    </div>
+    <hr />
+
+</div>
+        <br />
+
+        See <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/gremlin-support">this</a> for details about using Apache Tinkerpop's graph traversal language known as Gremlin, in Azure Cosmos.
+        <br />
+        See <a href="https://tinkerpop.apache.org/docs/current/recipes/#_anti_patterns">this</a> for common Gremlin query Antipatterns.
+        <br />
+        See <a href="https://www.nuget.org/packages/Microsoft.Azure.Cosmos">this</a> for an alternate Package that provides connectivity to Cosmos, using the SQL api instead of Gremlin.
+

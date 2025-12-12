@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Hackathon.Models.Post>
+
+@{
+    ViewBag.Title = "List of Threads";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of Posts, filtered by reaction.</h2>
+
+<table class="table">
+    <tr>
+        <th>
+           So many posts.
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+                <br />
+                by
+                @Html.ActionLink(item.Author, "IndexByAuthor", new { AuthorId = item.AuthorId })
+                <br />
+                @Html.ActionLink("🤣 (" + item.Lols + ")", "Lol", new { id = item.Id })
+                @Html.ActionLink("❤️ (" + item.Hearts + ")", "Heart", new { id = item.Id })
+                @Html.ActionLink("👍 (" + item.ThumbsUp + ")", "ThumbsUp", new { id = item.Id })
+                @Html.ActionLink("🦒 (" + item.GiraffeFaces + ")", "GiraffeFace", new { id = item.Id })
+            </td>
+            <td>
+                @Html.ActionLink("Reply", "Reply", new { id = item.Id }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("See Replies", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Return to all posts.", "Index")
+     <br />
+    @Html.ActionLink("Create New", "Create")
+</p>
